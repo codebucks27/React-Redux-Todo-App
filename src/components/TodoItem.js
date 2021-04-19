@@ -7,7 +7,7 @@ import { IoCheckmarkDoneSharp, IoClose } from "react-icons/io5";
 const TodoItem = (props) => {
   const { item, updateTodo, removeTodo, todoCompleted } = props;
   const inputRef = useRef(false);
-  console.log(inputRef);
+  //console.log(inputRef);
 
   const changeFunc = () => {
     inputRef.current.disabled = false;
@@ -34,7 +34,7 @@ const TodoItem = (props) => {
       exit={{
         x: "-60vw",
         scale: [1, 0],
-        backgroundColor: "red",
+        backgroundColor: "rgba(255,0,0,1)",
         transition: { duration: 0.5 },
       }}
       initial={{ x: "150vw", transition: { type: "spring", duration: 2 } }}

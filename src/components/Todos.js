@@ -37,7 +37,7 @@ const Todos = (props) => {
   };
   const add = () => {
     //console.log("todo input", todo);
-    if (todo == "") {
+    if (todo === "") {
       alert("Input is Empty!");
     } else {
       props.addTodo({
