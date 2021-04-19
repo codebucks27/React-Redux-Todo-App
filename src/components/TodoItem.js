@@ -55,23 +55,27 @@ const TodoItem = (props) => {
         >
           <AiFillEdit />
         </motion.button>
-        <motion.button
-          whileHover={{ scale: 1.4 }}
-          whileTap={{ scale: 0.9 }}
-          onClick={() => completed(item.id)}
-        >
-          <IoCheckmarkDoneSharp />
-        </motion.button>
+        {item.completed ? null : (
+          <motion.button
+            whileHover={{ scale: 1.4 }}
+            whileTap={{ scale: 0.9 }}
+            onClick={() => completed(item.id)}
+          >
+            <IoCheckmarkDoneSharp />
+          </motion.button>
+        )}
         <motion.button
           whileHover={{ scale: 1.4 }}
           whileTap={{ scale: 0.9 }}
           onClick={() => {
             removeTodo(item.id);
           }}
+          style={{ color: "red" }}
         >
           <IoClose />
         </motion.button>
       </div>
+      {item.completed && <span className="completed">done</span>}
     </motion.li>
   );
 };
