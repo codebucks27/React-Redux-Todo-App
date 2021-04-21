@@ -1,13 +1,8 @@
-import { motion } from "framer-motion";
 import React, { useState } from "react";
 import { connect } from "react-redux";
-import {
-  addTodos,
-  removeTodos,
-  updateTodos,
-  completedTodos,
-} from "../redux/reducer";
+import { addTodos } from "../redux/reducer";
 import { GoPlus } from "react-icons/go";
+import { motion } from "framer-motion";
 
 const mapStateToProps = (state) => {
   return {
@@ -18,56 +13,49 @@ const mapStateToProps = (state) => {
 const mapDispatchToProps = (dispatch) => {
   return {
     addTodo: (obj) => dispatch(addTodos(obj)),
-    removeTodo: (id) => dispatch(removeTodos(id)),
-    updateTodo: (obj) => dispatch(updateTodos(obj)),
-    completed: (id) => dispatch(completedTodos(id)),
   };
 };
 
 const Todos = (props) => {
-  const [todo, settodo] = useState("");
-  // const inputRef = useRef(true);
-
-  // const changeRef = () => {
-  //   inputRef.current.disabled = false;
-  // };
+  const [todo, setTodo] = useState("");
 
   const handleChange = (e) => {
-    settodo(e.target.value);
+    setTodo(e.target.value);
   };
+
   const add = () => {
-    //console.log("todo input", todo);
     if (todo === "") {
-      alert("Input is Empty!");
+      alert("Input is Empty");
     } else {
       props.addTodo({
         id: Math.floor(Math.random() * 1000),
         item: todo,
         completed: false,
       });
-      settodo("");
+      setTodo("");
     }
   };
-
+  //console.log("props from store", props);
   return (
     <div className="addTodos">
       <input
-        className="todo-input"
         type="text"
         onChange={(e) => handleChange(e)}
+        className="todo-input"
         value={todo}
       />
 
       <motion.button
-        className="add-btn"
-        onClick={() => add()}
         whileHover={{ scale: 1.1 }}
         whileTap={{ scale: 0.9 }}
+        className="add-btn"
+        onClick={() => add()}
       >
         <GoPlus />
       </motion.button>
+      <br />
     </div>
   );
 };
-
+//we can use connect method to connect this component with redux store
 export default connect(mapStateToProps, mapDispatchToProps)(Todos);

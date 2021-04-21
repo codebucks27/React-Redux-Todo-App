@@ -1,12 +1,12 @@
 import React, { useState } from "react";
 import { connect } from "react-redux";
-import TodoItem from "./TodoItem";
 import {
   addTodos,
+  completeTodos,
   removeTodos,
   updateTodos,
-  completedTodos,
 } from "../redux/reducer";
+import TodoItem from "./TodoItem";
 import { AnimatePresence, motion } from "framer-motion";
 
 const mapStateToProps = (state) => {
@@ -20,7 +20,7 @@ const mapDispatchToProps = (dispatch) => {
     addTodo: (obj) => dispatch(addTodos(obj)),
     removeTodo: (id) => dispatch(removeTodos(id)),
     updateTodo: (obj) => dispatch(updateTodos(obj)),
-    completed: (id) => dispatch(completedTodos(id)),
+    completeTodo: (id) => dispatch(completeTodos(id)),
   };
 };
 
@@ -51,7 +51,6 @@ const DisplayTodos = (props) => {
           All
         </motion.button>
       </div>
-
       <ul>
         <AnimatePresence>
           {props.todos.length > 0 && sort === "active"
@@ -63,13 +62,13 @@ const DisplayTodos = (props) => {
                       item={item}
                       removeTodo={props.removeTodo}
                       updateTodo={props.updateTodo}
-                      todoCompleted={props.completed}
+                      completeTodo={props.completeTodo}
                     />
                   )
                 );
               })
             : null}
-
+          {/* for completed items */}
           {props.todos.length > 0 && sort === "completed"
             ? props.todos.map((item) => {
                 return (
@@ -79,12 +78,13 @@ const DisplayTodos = (props) => {
                       item={item}
                       removeTodo={props.removeTodo}
                       updateTodo={props.updateTodo}
-                      todoCompleted={props.completed}
+                      completeTodo={props.completeTodo}
                     />
                   )
                 );
               })
             : null}
+          {/* for all items */}
           {props.todos.length > 0 && sort === "all"
             ? props.todos.map((item) => {
                 return (
@@ -93,7 +93,7 @@ const DisplayTodos = (props) => {
                     item={item}
                     removeTodo={props.removeTodo}
                     updateTodo={props.updateTodo}
-                    todoCompleted={props.completed}
+                    completeTodo={props.completeTodo}
                   />
                 );
               })

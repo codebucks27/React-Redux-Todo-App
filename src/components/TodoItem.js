@@ -1,65 +1,63 @@
 import { motion } from "framer-motion";
 import React, { useRef } from "react";
-
 import { AiFillEdit } from "react-icons/ai";
 import { IoCheckmarkDoneSharp, IoClose } from "react-icons/io5";
 
 const TodoItem = (props) => {
-  const { item, updateTodo, removeTodo, todoCompleted } = props;
-  const inputRef = useRef(false);
-  //console.log(inputRef);
+  const { item, updateTodo, removeTodo, completeTodo } = props;
 
-  const changeFunc = () => {
+  const inputRef = useRef(true);
+
+  const changeFocus = () => {
     inputRef.current.disabled = false;
     inputRef.current.focus();
   };
 
   const update = (id, value, e) => {
-    //console.log("id is", id, "value is", value);
-    //console.log(e.which);
     if (e.which === 13) {
+      //here 13 is key code for enter key
       updateTodo({ id, item: value });
       inputRef.current.disabled = true;
     }
   };
-
-  const completed = (id) => {
-    todoCompleted(id);
-  };
-
   return (
     <motion.li
-      key={item.id}
-      className="card"
+      initial={{ x: "150vw", transition: { type: "spring", duration: 2 } }}
+      animate={{ x: 0, transition: { type: "spring", duration: 2 } }}
+      whileHover={{
+        scale: 0.9,
+        transition: { type: "spring", duration: 0.1 },
+      }}
       exit={{
         x: "-60vw",
         scale: [1, 0],
-        backgroundColor: "rgba(255,0,0,1)",
         transition: { duration: 0.5 },
+        backgroundColor: "rgba(255,0,0,1)",
       }}
-      initial={{ x: "150vw", transition: { type: "spring", duration: 2 } }}
-      animate={{ x: 0, transition: { type: "spring", duration: 2 } }}
-      whileHover={{ scale: 0.9, transition: { type: "spring", duration: 0.1 } }}
+      key={item.id}
+      className="card"
     >
       <textarea
         ref={inputRef}
-        defaultValue={item.item}
         disabled={inputRef}
+        defaultValue={item.item}
         onKeyPress={(e) => update(item.id, inputRef.current.value, e)}
       />
       <div className="btns">
         <motion.button
           whileHover={{ scale: 1.4 }}
           whileTap={{ scale: 0.9 }}
-          onClick={() => changeFunc()}
+          onClick={() => changeFocus()}
         >
-          <AiFillEdit />
+          {" "}
+          <AiFillEdit />{" "}
         </motion.button>
-        {item.completed ? null : (
+        {item.completed === false && (
           <motion.button
             whileHover={{ scale: 1.4 }}
             whileTap={{ scale: 0.9 }}
-            onClick={() => completed(item.id)}
+            style={{ color: "green" }}
+            onClick={() => completeTodo(item.id)}
           >
             <IoCheckmarkDoneSharp />
           </motion.button>
@@ -67,13 +65,12 @@ const TodoItem = (props) => {
         <motion.button
           whileHover={{ scale: 1.4 }}
           whileTap={{ scale: 0.9 }}
-          onClick={() => {
-            removeTodo(item.id);
-          }}
           style={{ color: "red" }}
+          onClick={() => removeTodo(item.id)}
         >
+          {" "}
           <IoClose />
-        </motion.button>
+        </motion.button>{" "}
       </div>
       {item.completed && <span className="completed">done</span>}
     </motion.li>
