@@ -18,7 +18,7 @@ const mapDispatchToProps = (dispatch) => {
 
 const Todos = (props) => {
   const [todo, setTodo] = useState("");
-
+  console.log(props);
   const handleChange = (e) => {
     setTodo(e.target.value);
   };
@@ -35,7 +35,7 @@ const Todos = (props) => {
       setTodo("");
     }
   };
-  //console.log("props from store", props);
+  // console.log("props from store", props);
   return (
     <div className="addTodos">
       <input

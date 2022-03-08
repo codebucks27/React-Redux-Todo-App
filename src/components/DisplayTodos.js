@@ -24,6 +24,9 @@ const mapDispatchToProps = (dispatch) => {
   };
 };
 
+let elemFromLocalStore = JSON.parse(localStorage.getItem('todos'));
+console.log(elemFromLocalStore);
+
 const DisplayTodos = (props) => {
   const [sort, setSort] = useState("active");
   return (
@@ -55,39 +58,8 @@ const DisplayTodos = (props) => {
         <AnimatePresence>
           {props.todos.length > 0 && sort === "active"
             ? props.todos.map((item) => {
-                return (
-                  item.completed === false && (
-                    <TodoItem
-                      key={item.id}
-                      item={item}
-                      removeTodo={props.removeTodo}
-                      updateTodo={props.updateTodo}
-                      completeTodo={props.completeTodo}
-                    />
-                  )
-                );
-              })
-            : null}
-          {/* for completed items */}
-          {props.todos.length > 0 && sort === "completed"
-            ? props.todos.map((item) => {
-                return (
-                  item.completed === true && (
-                    <TodoItem
-                      key={item.id}
-                      item={item}
-                      removeTodo={props.removeTodo}
-                      updateTodo={props.updateTodo}
-                      completeTodo={props.completeTodo}
-                    />
-                  )
-                );
-              })
-            : null}
-          {/* for all items */}
-          {props.todos.length > 0 && sort === "all"
-            ? props.todos.map((item) => {
-                return (
+              return (
+                item.completed === false && (
                   <TodoItem
                     key={item.id}
                     item={item}
@@ -95,9 +67,50 @@ const DisplayTodos = (props) => {
                     updateTodo={props.updateTodo}
                     completeTodo={props.completeTodo}
                   />
-                );
-              })
+                )
+              );
+            })
             : null}
+          {/* for completed items */}
+          {props.todos.length > 0 && sort === "completed"
+            ? props.todos.map((item) => {
+              return (
+                item.completed === true && (
+                  <TodoItem
+                    key={item.id}
+                    item={item}
+                    removeTodo={props.removeTodo}
+                    updateTodo={props.updateTodo}
+                    completeTodo={props.completeTodo}
+                  />
+                )
+              );
+            })
+            : null}
+          {/* for all items */}
+          {props.todos.length > 0 && sort === "all"
+            ? props.todos.map((item) => {
+              return (
+                <TodoItem
+                  key={item.id}
+                  item={item}
+                  removeTodo={props.removeTodo}
+                  updateTodo={props.updateTodo}
+                  completeTodo={props.completeTodo}
+                />
+              );
+            })
+            : elemFromLocalStore.map((item) => {
+              return (
+                <TodoItem
+                  key={item.id}
+                  item={item}
+                  removeTodo={props.removeTodo}
+                  updateTodo={props.updateTodo}
+                  completeTodo={props.completeTodo}
+                />
+              );
+            })}
         </AnimatePresence>
       </ul>
     </div>
