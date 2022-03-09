@@ -5,6 +5,7 @@ import {
   completeTodos,
   removeTodos,
   updateTodos,
+  localStore,
 } from "../redux/reducer";
 import TodoItem from "./TodoItem";
 import { AnimatePresence, motion } from "framer-motion";
@@ -24,10 +25,11 @@ const mapDispatchToProps = (dispatch) => {
   };
 };
 
-let elemFromLocalStore = JSON.parse(localStorage.getItem('todos'));
-console.log(elemFromLocalStore);
 
 const DisplayTodos = (props) => {
+  // let elemFromLocalStore = JSON.parse(localStorage.getItem('todos'));
+  // console.log('elemFromLocalStore', elemFromLocalStore);
+  console.log(props.todos);
   const [sort, setSort] = useState("active");
   return (
     <div className="displaytodos">
@@ -100,7 +102,9 @@ const DisplayTodos = (props) => {
                 />
               );
             })
-            : elemFromLocalStore.map((item) => {
+            : null}
+          {props.todos.length === 0 && localStore !== null
+            ? localStore.map((item) => {
               return (
                 <TodoItem
                   key={item.id}
@@ -110,7 +114,8 @@ const DisplayTodos = (props) => {
                   completeTodo={props.completeTodo}
                 />
               );
-            })}
+            })
+            : null}
         </AnimatePresence>
       </ul>
     </div>
