@@ -3,6 +3,11 @@ import { createSlice } from "@reduxjs/toolkit";
 const initialState = [];
 let localArray = [];
 export const localStore = JSON.parse(localStorage.getItem('todos'));
+if (localStore !== null) {
+  localArray.push(localStore);
+  console.log('działa');
+  console.log(localArray);
+}
 
 const addTodoReducer = createSlice({
   name: "todos",
