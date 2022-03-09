@@ -3,6 +3,7 @@ import { connect } from "react-redux";
 import {
   addTodos,
   completeTodos,
+  deleteTodos,
   removeTodos,
   updateTodos,
   localStore,
@@ -22,6 +23,7 @@ const mapDispatchToProps = (dispatch) => {
     removeTodo: (id) => dispatch(removeTodos(id)),
     updateTodo: (obj) => dispatch(updateTodos(obj)),
     completeTodo: (id) => dispatch(completeTodos(id)),
+    deleteTodo: (id) => dispatch(deleteTodos(id)),
   };
 };
 
@@ -55,6 +57,13 @@ const DisplayTodos = (props) => {
         >
           All
         </motion.button>
+        <motion.button
+          whileHover={{ scale: 1.1 }}
+          whileTap={{ scale: 0.9 }}
+          onClick={() => setSort("deleted")}
+        >
+          Deleted
+        </motion.button>
       </div>
       <ul>
         <AnimatePresence>
@@ -68,6 +77,7 @@ const DisplayTodos = (props) => {
                     removeTodo={props.removeTodo}
                     updateTodo={props.updateTodo}
                     completeTodo={props.completeTodo}
+                    deleteTodo={props.deleteTodo}
                   />
                 )
               );
@@ -84,6 +94,7 @@ const DisplayTodos = (props) => {
                     removeTodo={props.removeTodo}
                     updateTodo={props.updateTodo}
                     completeTodo={props.completeTodo}
+                    deleteTodo={props.deleteTodo}
                   />
                 )
               );
@@ -99,7 +110,24 @@ const DisplayTodos = (props) => {
                   removeTodo={props.removeTodo}
                   updateTodo={props.updateTodo}
                   completeTodo={props.completeTodo}
+                  deleteTodo={props.deleteTodo}
                 />
+              );
+            })
+            : null}
+          {props.todos.length > 0 && sort === "deleted"
+            ? props.todos.map((item) => {
+              return (
+                item.deleted === true && (
+                  <TodoItem
+                    key={item.id}
+                    item={item}
+                    removeTodo={props.removeTodo}
+                    updateTodo={props.updateTodo}
+                    completeTodo={props.completeTodo}
+                    deleteTodo={props.deleteTodo}
+                  />
+                )
               );
             })
             : null}
@@ -112,6 +140,7 @@ const DisplayTodos = (props) => {
                   removeTodo={props.removeTodo}
                   updateTodo={props.updateTodo}
                   completeTodo={props.completeTodo}
+                  deleteTodo={props.deleteTodo}
                 />
               );
             })

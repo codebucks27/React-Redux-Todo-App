@@ -168,7 +168,7 @@ body {
   outline: none;
 }
 
-.completed {
+.completed, .deleted {
   position: absolute;
   right: 0.3rem;
   top: 0.3rem;
