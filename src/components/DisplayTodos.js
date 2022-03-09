@@ -1,31 +1,24 @@
-import React, { useState } from "react";
-import { connect } from "react-redux";
+import React, { useEffect, useState } from "react";
 import {
-  addTodos,
   completeTodos,
   removeTodos,
+  selectTodos,
   updateTodos,
+  restoreTodos,
 } from "../redux/reducer";
 import TodoItem from "./TodoItem";
 import { AnimatePresence, motion } from "framer-motion";
+import { useSelector } from "react-redux";
 
-const mapStateToProps = (state) => {
-  return {
-    todos: state,
-  };
-};
-
-const mapDispatchToProps = (dispatch) => {
-  return {
-    addTodo: (obj) => dispatch(addTodos(obj)),
-    removeTodo: (id) => dispatch(removeTodos(id)),
-    updateTodo: (obj) => dispatch(updateTodos(obj)),
-    completeTodo: (id) => dispatch(completeTodos(id)),
-  };
-};
-
-const DisplayTodos = (props) => {
+const DisplayTodos = () => {
+  const { todos, deletedTodos } = useSelector(selectTodos);
   const [sort, setSort] = useState("active");
+
+  useEffect(() => {
+    localStorage.setItem("todos", JSON.stringify(todos));
+    localStorage.setItem("deletedTodos", JSON.stringify(deletedTodos));
+  }, [todos, deletedTodos]);
+
   return (
     <div className="displaytodos">
       <div className="buttons">
@@ -46,6 +39,13 @@ const DisplayTodos = (props) => {
         <motion.button
           whileHover={{ scale: 1.1 }}
           whileTap={{ scale: 0.9 }}
+          onClick={() => setSort("deleted")}
+        >
+          Deleted
+        </motion.button>
+        <motion.button
+          whileHover={{ scale: 1.1 }}
+          whileTap={{ scale: 0.9 }}
           onClick={() => setSort("all")}
         >
           All
@@ -53,47 +53,59 @@ const DisplayTodos = (props) => {
       </div>
       <ul>
         <AnimatePresence>
-          {props.todos.length > 0 && sort === "active"
-            ? props.todos.map((item) => {
+          {todos.length > 0 && sort === "active"
+            ? todos.map((item) => {
                 return (
                   item.completed === false && (
                     <TodoItem
                       key={item.id}
                       item={item}
-                      removeTodo={props.removeTodo}
-                      updateTodo={props.updateTodo}
-                      completeTodo={props.completeTodo}
+                      removeTodo={removeTodos}
+                      updateTodo={updateTodos}
+                      completeTodo={completeTodos}
                     />
                   )
                 );
               })
             : null}
           {/* for completed items */}
-          {props.todos.length > 0 && sort === "completed"
-            ? props.todos.map((item) => {
+          {todos.length > 0 && sort === "completed"
+            ? todos.map((item) => {
                 return (
                   item.completed === true && (
                     <TodoItem
                       key={item.id}
                       item={item}
-                      removeTodo={props.removeTodo}
-                      updateTodo={props.updateTodo}
-                      completeTodo={props.completeTodo}
+                      removeTodo={removeTodos}
+                      updateTodo={updateTodos}
+                      completeTodo={completeTodos}
                     />
                   )
                 );
               })
             : null}
-          {/* for all items */}
-          {props.todos.length > 0 && sort === "all"
-            ? props.todos.map((item) => {
+          {/* for deleted items */}
+          {deletedTodos.length > 0 && sort === "deleted"
+            ? deletedTodos.map((item) => {
                 return (
                   <TodoItem
                     key={item.id}
                     item={item}
-                    removeTodo={props.removeTodo}
-                    updateTodo={props.updateTodo}
-                    completeTodo={props.completeTodo}
+                    restoreTodo={restoreTodos}
+                  />
+                );
+              })
+            : null}
+          {/* for all items */}
+          {todos.length > 0 && sort === "all"
+            ? todos.map((item) => {
+                return (
+                  <TodoItem
+                    key={item.id}
+                    item={item}
+                    removeTodo={removeTodos}
+                    updateTodo={updateTodos}
+                    completeTodo={completeTodos}
                   />
                 );
               })
@@ -104,4 +116,4 @@ const DisplayTodos = (props) => {
   );
 };
 
-export default connect(mapStateToProps, mapDispatchToProps)(DisplayTodos);
+export default DisplayTodos;
