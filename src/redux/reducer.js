@@ -3,10 +3,8 @@ import { createSlice } from "@reduxjs/toolkit";
 const initialState = [];
 let localArray = [];
 export const localStore = JSON.parse(localStorage.getItem('todos'));
-if (localStore !== null) {
+if (localStore !== null && localStore === []) {
   localArray.push(localStore);
-  console.log('działa');
-  console.log(localArray);
 }
 
 const addTodoReducer = createSlice({
@@ -16,7 +14,6 @@ const addTodoReducer = createSlice({
     //here we will write our reducer
     //Adding todos
     addTodos: (state, action) => {
-      console.log(state);
       state.push(action.payload);
       localArray.push(action.payload);
       localStorage.setItem('todos', JSON.stringify(localArray));
@@ -24,6 +21,11 @@ const addTodoReducer = createSlice({
     },
     //remove todos
     removeTodos: (state, action) => {
+      let localStore = JSON.parse(localStorage.getItem('todos'));
+      let removedLocalStore = localStore.filter(item => {
+        return item.id !== action.payload;
+      })
+      localStorage.setItem('todos', JSON.stringify(removedLocalStore));
       return state.filter((item) => item.id !== action.payload);
     },
     //update todos

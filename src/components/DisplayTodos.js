@@ -29,7 +29,7 @@ const mapDispatchToProps = (dispatch) => {
 const DisplayTodos = (props) => {
   // let elemFromLocalStore = JSON.parse(localStorage.getItem('todos'));
   // console.log('elemFromLocalStore', elemFromLocalStore);
-  console.log(props.todos);
+  // console.log(props.todos);
   const [sort, setSort] = useState("active");
   return (
     <div className="displaytodos">
