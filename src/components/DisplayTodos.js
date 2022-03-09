@@ -12,8 +12,10 @@ import TodoItem from "./TodoItem";
 import { AnimatePresence, motion } from "framer-motion";
 
 const mapStateToProps = (state) => {
+  console.log(state);
   return {
     todos: state,
+    deletedTodos: state,
   };
 };
 
@@ -28,10 +30,10 @@ const mapDispatchToProps = (dispatch) => {
 };
 
 
+
 const DisplayTodos = (props) => {
-  // let elemFromLocalStore = JSON.parse(localStorage.getItem('todos'));
-  // console.log('elemFromLocalStore', elemFromLocalStore);
-  // console.log(props.todos);
+  console.log(props);
+  console.log(props.deletedTodos);
   const [sort, setSort] = useState("active");
   return (
     <div className="displaytodos">
@@ -60,7 +62,9 @@ const DisplayTodos = (props) => {
         <motion.button
           whileHover={{ scale: 1.1 }}
           whileTap={{ scale: 0.9 }}
-          onClick={() => setSort("deleted")}
+          onClick={() => {
+            setSort("deleted");
+          }}
         >
           Deleted
         </motion.button>

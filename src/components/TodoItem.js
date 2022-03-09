@@ -67,7 +67,7 @@ const TodoItem = (props) => {
           whileTap={{ scale: 0.9 }}
           style={{ color: "red" }}
           onClick={() => {
-            // removeTodo(item.id)
+            // removeTodo(item.id);
             deleteTodo(item.id)
           }}
         >

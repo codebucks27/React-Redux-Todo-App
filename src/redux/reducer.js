@@ -52,6 +52,7 @@ const addTodoReducer = createSlice({
         return todo;
       });
     },
+    //deleted
     deleteTodos: (state, action) => {
       return state.map((todo) => {
         if (todo.id === action.payload) {

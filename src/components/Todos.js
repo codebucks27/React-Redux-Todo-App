@@ -7,6 +7,7 @@ import { motion } from "framer-motion";
 const mapStateToProps = (state) => {
   return {
     todos: state,
+    deletedTodos: state,
   };
 };
 
