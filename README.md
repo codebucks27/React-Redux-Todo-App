@@ -9,6 +9,9 @@ If you want to learn how to create it please follow below tutorial:
 
 https://youtu.be/YhgSuUkWlK4
 
+If you prefer the blog format then checkout this link👇: <br />
+<a href="https://devdreaming.com/videos/build-stunning-portfolio-website-react-js-framer-motion#code-links" target="_blank" rel="dofollow">Checkout this blog on How to Build a Todo App with Redux and React JS</a> <br />
+
 
 This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
 
