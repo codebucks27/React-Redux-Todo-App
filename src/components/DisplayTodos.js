@@ -32,6 +32,7 @@ const DisplayTodos = (props) => {
         <motion.button
           whileHover={{ scale: 1.1 }}
           whileTap={{ scale: 0.9 }}
+          transition={{ type: "spring", duration: 0.3 }}
           onClick={() => setSort("active")}
         >
           Active
@@ -39,6 +40,7 @@ const DisplayTodos = (props) => {
         <motion.button
           whileHover={{ scale: 1.1 }}
           whileTap={{ scale: 0.9 }}
+          transition={{ type: "spring", duration: 0.3 }}
           onClick={() => setSort("completed")}
         >
           Completed
@@ -46,6 +48,7 @@ const DisplayTodos = (props) => {
         <motion.button
           whileHover={{ scale: 1.1 }}
           whileTap={{ scale: 0.9 }}
+          transition={{ type: "spring", duration: 0.3 }}
           onClick={() => setSort("all")}
         >
           All

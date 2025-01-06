@@ -25,8 +25,8 @@ const TodoItem = (props) => {
       initial={{ x: "150vw", transition: { type: "spring", duration: 2 } }}
       animate={{ x: 0, transition: { type: "spring", duration: 2 } }}
       whileHover={{
-        scale: 0.9,
-        transition: { type: "spring", duration: 0.1 },
+        scale: 1.05,
+        transition: { type: "spring", duration: 0.3 },
       }}
       exit={{
         x: "-60vw",
@@ -45,7 +45,7 @@ const TodoItem = (props) => {
       />
       <div className="btns">
         <motion.button
-          whileHover={{ scale: 1.4 }}
+          whileHover={{ scale: 1.2 }}
           whileTap={{ scale: 0.9 }}
           onClick={() => changeFocus()}
         >
@@ -54,7 +54,7 @@ const TodoItem = (props) => {
         </motion.button>
         {item.completed === false && (
           <motion.button
-            whileHover={{ scale: 1.4 }}
+            whileHover={{ scale: 1.2 }}
             whileTap={{ scale: 0.9 }}
             style={{ color: "green" }}
             onClick={() => completeTodo(item.id)}
@@ -63,7 +63,7 @@ const TodoItem = (props) => {
           </motion.button>
         )}
         <motion.button
-          whileHover={{ scale: 1.4 }}
+          whileHover={{ scale: 1.3 }}
           whileTap={{ scale: 0.9 }}
           style={{ color: "red" }}
           onClick={() => removeTodo(item.id)}

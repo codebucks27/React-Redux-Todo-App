@@ -28,6 +28,7 @@ body {
   margin-top: 3rem;
   display: flex;
   flex-direction: column;
+  align-items: center;
 }
 
 .App h1 {
@@ -35,6 +36,8 @@ body {
   text-align: center;
   margin-bottom: 2rem;
   color: #e1ebfd;
+  width: fit-content;
+  font-size: 3rem;
 
   text-shadow: 0 0 5px #433aa8, 3px -1px 5px #271c6c;
 }
@@ -44,6 +47,11 @@ body {
   justify-content: center;
 }
 
+.todo-form {
+  display: flex;
+  gap: 0.5rem;
+}
+
 .todo-input {
   min-width: 15rem;
   width: 40vw;
@@ -51,7 +59,7 @@ body {
   max-height: 2.5rem;
   background-color: #e1ebfd;
   border: none;
-  border-radius: 5px;
+  border-radius: 9999px;
   padding: 0.5rem 1rem;
 
   align-self: center;
@@ -62,14 +70,13 @@ body {
 }
 
 .add-btn {
-  margin-left: 1rem;
   background-color: #271c6c;
   color: #e1ebfd;
   border-radius: 50%;
   border: 2px solid #e1ebfd;
   font-size: 1.5rem;
-  width: 3.2rem;
-  height: 3.2rem;
+  width: 2.7rem;
+  height: 2.7rem;
   cursor: pointer;
   box-shadow: 2px 4px 10px #271c6c;
 
@@ -82,10 +89,18 @@ body {
   outline: none;
 }
 
+.container {
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+}
+
 .displaytodos {
   margin-top: 3rem;
   display: flex;
   flex-direction: column;
+  align-items: center;
+  width: 100%;
   align-items: center;
 }
 
@@ -113,7 +128,8 @@ body {
   display: flex;
   align-self: flex-start;
   flex-wrap: wrap;
-  margin-left: 5%;
+  margin: 0 5% 0 5%;
+  justify-content: center;
 }
 
 .card {
@@ -140,6 +156,7 @@ body {
   border-radius: 8px;
   border: none;
   background-color: #e1ebfd;
+  resize: none;
 
   color: #271c6c;
   height: 70%;

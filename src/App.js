@@ -9,7 +9,7 @@ function App() {
       <motion.h1
         initial={{ y: -200 }}
         animate={{ y: 0 }}
-        transition={{ type: "spring", duration: 0.5 }}
+        transition={{ type: "spring", duration: 0.3 }}
         whileHover={{ scale: 1.1 }}
       >
         Todo App
@@ -18,6 +18,7 @@ function App() {
         initial={{ y: 1000 }}
         animate={{ y: 0 }}
         transition={{ type: "spring", duration: 1 }}
+        className="container"
       >
         <Todos />
         <DisplayTodos />

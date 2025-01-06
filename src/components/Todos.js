@@ -23,9 +23,10 @@ const Todos = (props) => {
     setTodo(e.target.value);
   };
 
-  const add = () => {
-    if (todo === "") {
+  const handleSubmit = (value) => {
+    if (value === "") {
       alert("Input is Empty");
+      return;
     } else {
       props.addTodo({
         id: Math.floor(Math.random() * 1000),
@@ -35,25 +36,34 @@ const Todos = (props) => {
       setTodo("");
     }
   };
+
   //console.log("props from store", props);
   return (
     <div className="addTodos">
-      <input
-        type="text"
-        onChange={(e) => handleChange(e)}
-        className="todo-input"
-        value={todo}
-      />
-
-      <motion.button
-        whileHover={{ scale: 1.1 }}
-        whileTap={{ scale: 0.9 }}
-        className="add-btn"
-        onClick={() => add()}
+      <form
+        className="todo-form"
+        onSubmit={(e) => {
+          e.preventDefault();
+          handleSubmit(todo);
+        }}
       >
-        <GoPlus />
-      </motion.button>
-      <br />
+        <input
+          type="text"
+          onChange={(e) => handleChange(e)}
+          className="todo-input"
+          value={todo}
+        />
+
+        <motion.button
+          className="add-btn"
+          whileHover={{ scale: 1.1 }}
+          whileTap={{ scale: 0.9 }}
+          transition={{ type: "spring", duration: 0.3 }}
+          onClick={() => handleSubmit(todo)}
+        >
+          <GoPlus />
+        </motion.button>
+      </form>
     </div>
   );
 };
