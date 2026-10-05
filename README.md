@@ -81,3 +81,10 @@ This section has moved here: [https://facebook.github.io/create-react-app/docs/d
 ### `npm run build` fails to minify
 
 This section has moved here: [https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify](https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify)
+
+
+## Dependency and tooling update
+
+The original tutorial and CRA notes above are retained for reference. The app now uses React 19 (`createRoot`), Redux Toolkit 2/Redux 5/React Redux 9, Framer Motion 14 and React Icons 5, with Vite 8 replacing CRA. JSX entry files use `.jsx`; the stale starter test is migrated to actual todo-flow coverage using Vitest and current Testing Library; ESLint 9 is retained for React plugin compatibility.
+
+Use Bun 1.4.2: `bun install --frozen-lockfile`, `bun run start` (or `bun run dev`, port 3000), `bun run lint`, `bun run test` (`bun run test:watch` for watch mode), `bun run build`, and `bun run preview`. Node 22.22.2+, 24.15+ or 26+ is required by the development tools. Production files still go to `build/`, including `third-party-licenses.md`; public assets and SPA routing are preserved, and build targets follow the original Browserslist production query. Existing `REACT_APP_*`, `process.env.NODE_ENV`, `process.env.PUBLIC_URL` and HTML `%PUBLIC_URL%` remain supported; `PUBLIC_URL` also sets the asset base path. No environment values are required.
